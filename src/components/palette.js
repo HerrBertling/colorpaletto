@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-const Palette = (props) => {
-
+const Palette = ({ children }) => {
     return(
         <div className="palette">
-            {props.children}
+            {children}
         </div>
     );
+};
+
+Palette.propTypes = {
+    children: PropTypes.node
 };
 
 export default Palette;
