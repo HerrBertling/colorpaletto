@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import chroma from 'chroma-js';
 import { SketchPicker } from 'react-color';
 
-import Palette from './components/palette';
-import ColorCard from './components/color_card';
+import { Palette, ColorCard, Header } from './components';
+
 import './App.css';
 
 class App extends Component {
@@ -53,7 +53,7 @@ class App extends Component {
             'hcl'
         ).hex();
         const accentScale = chroma.scale([originColor, scaleEndColor]).mode('lab').correctLightness();
-        const accentColor = accentScale(0.85).hex();
+        const accentColor = accentScale(0.9).hex();
 
         const fontScale = chroma.scale([originColor, '000']).mode('lab').correctLightness();
         const fontColor = fontScale(0.9).luminance(0.03).hex();
@@ -61,17 +61,11 @@ class App extends Component {
         const lightFontScale = chroma.scale([originColor, '666']).mode('lab').correctLightness();
         const lightFontColor = lightFontScale(0.95).luminance(0.2).hex();
 
-        const mainColorScale = chroma.scale([originColor, fontColor]).mode('lab').correctLightness();
-        const mainColor600 = mainColorScale(0.2);
-        const mainColor700 = mainColorScale(0.4);
-
         this.setState({
             mainColor: color.hex,
-            mainColor600: mainColor600,
-            mainColor700: mainColor700,
             fontColor: `${fontColor}`,
             lightFontColor: `${lightFontColor}`,
-            accentColor: `${accentColor}`,
+            accentColor: `${accentColor}`
         })
 
     };
@@ -79,15 +73,8 @@ class App extends Component {
     render() {
         return (
             <div>
+                <Header />
                 <Palette>
-                    <ColorCard
-                        name='Font color'
-                        color={this.state.fontColor}
-                    />
-                    <ColorCard
-                        name='Font color (light)'
-                        color={this.state.lightFontColor}
-                    />
                     <div className='colorpickerWrapper'>
                         <ColorCard
                             name='Main color'
@@ -100,6 +87,14 @@ class App extends Component {
                             </div> : null
                         }
                     </div>
+                    <ColorCard
+                        name='Font color'
+                        color={this.state.fontColor}
+                    />
+                    <ColorCard
+                        name='Font color (light)'
+                        color={this.state.lightFontColor}
+                    />
                     <ColorCard
                         name='Accent color'
                         color={this.state.accentColor}

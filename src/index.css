@@ -1,28 +1,80 @@
+:root {
+    --spaceBase: 8px;
+    --fontColorDark: #555;
+    --fontColorLight: #888;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Avenir, Open Sans, Helvetica, Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Avenir, Open Sans, Helvetica, Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.header {
+    margin: 0 auto;
+    padding: calc(var(--spaceBase) * 3) 0;
+    max-width: 80vw;
+    text-align: center;
+}
+
+.mainTitle {
+    color: var(--fontColorDark);
+    margin: 0;
+}
+.subTitle {
+    color: var(--fontColorLight);
+    margin: 0;
 }
 
 .palette {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: var(--spaceBase);
+    width: 80vw;
 }
 
 .card {
-    border-radius: 8px;
-    height: 40vh;
-    width: 12vw;
-    margin: 0 10px;
-    max-width: 200px;
-    max-height: 300px;
+    border-radius: var(--spaceBase);
+    height: 30vh;
+    margin: 0 var(--spaceBase) calc(var(--spaceBase) * 2);
     overflow: hidden;
     box-sizing: border-box;
     box-shadow: 0 1px 3px rgba(50,50,50,0.12), 0 1px 2px rgba(50,50,50,0.24);
+}
+
+.colorpickerWrapper {
+    position: relative;
+}
+
+@media (max-width: 899px) {
+    .palette {
+        grid-template-areas: "fullwidth fullwidth"
+                             "half half"
+                             "half half";
+    }
+    .colorpickerWrapper {
+        grid-area: fullwidth;
+    }
+}
+
+@media (min-width: 900px) {
+    .palette {
+        width: 90vw;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+    .card {
+        margin: 0 var(--spaceBase);
+        height: 40vh;
+        /*width: 100%;*/
+        max-width: 200px;
+        max-height: 300px;
+    }
 }
 
 .colorDisplay {
@@ -33,7 +85,7 @@ body {
 .colorDescription {
     background-color: white;
     border-top: 1px solid #dedede;
-    padding: 10px;
+    padding: var(--spaceBase);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -42,11 +94,11 @@ body {
 }
 
 .colorName {
-    color: #555;
+    color: var(--fontColorDark);
 }
 
 .colorValue {
-    color: #888;
+    color: var(--fontColorLight);
 }
 
 .colorName,
@@ -56,9 +108,6 @@ body {
     padding: 0;
 }
 
-.colorpickerWrapper {
-    position: relative;
-}
 .colorpicker {
     position: absolute;
     top: 0;
@@ -74,17 +123,4 @@ body {
 .sketch-picker {
     position: relative;
     z-index: 2;
-}
-
-.businesscard {
-    margin: 50px auto;
-    width: 50%;
-    height: auto;
-    max-width: 400px;
-    box-shadow: 0 1px 3px rgba(50,50,50,0.12), 0 1px 2px rgba(50,50,50,0.24);
-}
-
-.businesscard svg {
-    height: auto;
-    max-width: 100%;
 }
